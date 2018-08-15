@@ -1,11 +1,18 @@
-﻿using System;
+﻿using Main;
+using Ninject;
+using ServiceInterfaces;
+using System;
 
 namespace Domain
 {
     class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
+            var module = new OnionModule();
+            var kernel = new StandardKernel(module);
+            var userService = kernel.Get<IUserService>();
+            userService.DeleteUSer(123);
             Console.WriteLine("Hello World!");
         }
     }
